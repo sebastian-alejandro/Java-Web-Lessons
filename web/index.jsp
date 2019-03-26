@@ -3,7 +3,6 @@
     Created on : 26-03-2019, 8:57:02
     Author     : sebastian-alejandro
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +11,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <a href="Form">Example Form</a>
+        
     </body>
 </html>

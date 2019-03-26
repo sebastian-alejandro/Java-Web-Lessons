@@ -5,6 +5,7 @@
  */
 package example.form.controller;
 
+import example.form.model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author sebastian-alejandro
  */
-@WebServlet(name = "Validate", urlPatterns = {"/Validate"})
-public class Validate extends HttpServlet {
+@WebServlet(name = "Validate", urlPatterns = {"/Form"})
+public class Form extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +59,7 @@ public class Validate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("/form.jsp").forward(request, response);
     }
 
     /**
@@ -72,7 +73,28 @@ public class Validate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String error = "";
+        
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        int age = Integer.parseInt(request.getParameter("range"));
+        String grade = request.getParameter("grade");
+        
+        if (firstName.isEmpty()
+                || lastName.isEmpty()
+                || age == 0
+                || grade.isEmpty()){
+            error = error.concat("Fields can't be empties");
+            request.setAttribute("error", error);
+            request.getRequestDispatcher("/form.jsp").forward(request, response);
+        }
+        else{
+            Student std = new Student(firstName, lastName, age, grade);
+        
+            request.setAttribute("student", std);
+            request.getRequestDispatcher("/studentList.jsp").forward(request, response);   
+        }
     }
 
     /**
