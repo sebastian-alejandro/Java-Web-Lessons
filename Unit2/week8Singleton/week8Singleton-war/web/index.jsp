@@ -19,12 +19,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Week8</title>
     </head>
     <body>
         <h3>Client List</h3>
-        <form action="new-client">
+        <div class="container">
+        <form action="client">
             <p>
             <label for="id">Id</label>
             <input type="text" name="id" value="">
@@ -37,9 +45,9 @@
             <label for="lastname">Last Name</label>
             <input type="text" name="lastname" value="" placeholder="Type Last Name">
             </p>
-            <p><input type="submit" name="btn" value="Submit"></p>
+            <p><button class="btn waves-effect waves-light" type="submit" name="btn" value="1">Submit</button></p>
         </form>
-        
+            <h6>${txt}</h6>
         <table>
             
             <thead>
@@ -60,8 +68,12 @@
                     <td>
                         ${c.lastName}
                     </td>
+                    <td>
+                        <a href="remove.jsp?id=${c.id}">Delete</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
+            </div>
     </body>
 </html>

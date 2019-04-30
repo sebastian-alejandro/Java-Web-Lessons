@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author sistemas
  */
-@WebServlet(name = "ClientController", urlPatterns = {"/new-client"})
+@WebServlet(name = "ClientController", urlPatterns = {"/client"})
 public class ClientController extends HttpServlet {
 
     @EJB
@@ -40,14 +40,22 @@ public class ClientController extends HttpServlet {
             throws ServletException, IOException {
         
         int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String lastName = request.getParameter("lastname");
-        
-        Client c = new Client(id, name, lastName);
-        
-        service.addClient(c);
-        
-        response.sendRedirect("index.jsp");
+        String btn = request.getParameter("btn");
+        String txt = "";
+        switch (btn){
+            case "1":
+                String name = request.getParameter("name");
+                String lastName = request.getParameter("lastname");
+                Client c = new Client(id, name, lastName);
+                service.addClient(c);
+                response.sendRedirect("index.jsp");
+                break;
+            case "2":
+                txt=service.deleteClient(id);
+                request.setAttribute("txt", txt);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
+        }
         
     }
 
