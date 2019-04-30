@@ -17,6 +17,11 @@ import javax.ejb.Singleton;
 public class Service implements ServiceLocal {
     
     private ArrayList<Client> list = new ArrayList();
+
+    public Service() {
+        list.add(new Client(1, "Jhon", "Smith"));
+        list.add(new Client(2, "Sara", "Jonsson"));
+    }
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
