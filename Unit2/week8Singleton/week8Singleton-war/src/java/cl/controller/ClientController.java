@@ -41,11 +41,13 @@ public class ClientController extends HttpServlet {
         
         int id = Integer.parseInt(request.getParameter("id"));
         String btn = request.getParameter("btn");
+        String name = "";
+        String lastName = "";
         String txt = "";
         switch (btn){
             case "1":
-                String name = request.getParameter("name");
-                String lastName = request.getParameter("lastname");
+                name = request.getParameter("name");
+                lastName = request.getParameter("lastname");
                 Client c = new Client(id, name, lastName);
                 service.addClient(c);
                 response.sendRedirect("index.jsp");
@@ -53,6 +55,14 @@ public class ClientController extends HttpServlet {
             case "2":
                 txt=service.deleteClient(id);
                 request.setAttribute("txt", txt);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
+            case "3":
+                name = request.getParameter("name");
+                lastName = request.getParameter("lastname");
+                Client client = service.search(id);
+                client.setName(name);
+                client.setLastName(lastName);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
         }
