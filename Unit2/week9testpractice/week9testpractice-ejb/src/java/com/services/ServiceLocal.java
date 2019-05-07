@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.services;
+package com.services;
 
-import cl.model.Client;
+import com.model.Socio;
 import java.util.ArrayList;
 import javax.ejb.Local;
 
@@ -15,15 +15,14 @@ import javax.ejb.Local;
  */
 @Local
 public interface ServiceLocal {
-
-    void addClient(Client client);
-
-    Client search(int id);
     
-    ArrayList<Client> getAllClient();
-
-    String deleteClient(int id);
+    void agregarSocio(String rut, String nombre, int edad, int idcat);
     
-    String updateClient(int id, String name, String lastName);
+    ArrayList<Socio> mostrarSocios();
     
+    Socio buscar(String rut);
+    
+    String eliminarSocio(String rut);
+    
+    String modificarSocio(String rut, String name, int edad, int idcat);
 }

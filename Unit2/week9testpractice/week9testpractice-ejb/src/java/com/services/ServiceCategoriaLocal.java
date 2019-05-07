@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.services;
+package com.services;
 
-import cl.model.Client;
+import com.model.Categoria;
 import java.util.ArrayList;
 import javax.ejb.Local;
 
@@ -14,16 +14,8 @@ import javax.ejb.Local;
  * @author sistemas
  */
 @Local
-public interface ServiceLocal {
-
-    void addClient(Client client);
-
-    Client search(int id);
+public interface ServiceCategoriaLocal {
     
-    ArrayList<Client> getAllClient();
-
-    String deleteClient(int id);
-    
-    String updateClient(int id, String name, String lastName);
+    ArrayList<Categoria> mostrarCategorias();
     
 }

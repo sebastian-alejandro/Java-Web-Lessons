@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.controller;
+package com.controller;
 
-import cl.model.Client;
-import cl.services.ServiceLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,12 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author sistemas
  */
-@WebServlet(name = "ClientController", urlPatterns = {"/client"})
-public class ClientController extends HttpServlet {
-
-    @EJB
-    private ServiceLocal service;
-    
+@WebServlet(name = "socios", urlPatterns = {"/socioController"})
+public class socioController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,34 +31,19 @@ public class ClientController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int id = Integer.parseInt(request.getParameter("id"));
-        String btn = request.getParameter("btn");
-        String name = "";
-        String lastName = "";
-        String txt = "";
-        switch (btn){
-            case "1":
-                name = request.getParameter("name");
-                lastName = request.getParameter("lastname");
-                Client c = new Client(id, name, lastName);
-                service.addClient(c);
-                response.sendRedirect("index.jsp");
-                break;
-            case "2":
-                txt=service.deleteClient(id);
-                request.setAttribute("txt", txt);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                break;
-            case "3":
-                name = request.getParameter("name");
-                lastName = request.getParameter("lastname");
-                txt=service.updateClient(id, name, lastName);
-                request.setAttribute("txt", txt);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                break;
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet socioController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet socioController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -58,5 +58,18 @@ public class Service implements ServiceLocal {
         }
     }
     
+    @Override
+    public String updateClient(int id, String name, String lastName) {
+        Client c = search(id);
+        if (c==null){
+            return "Id not found.";
+        }
+        else {
+            c.setName(name);
+            c.setLastName(lastName);
+            return "Client Updated.";
+        }
+    }
+    
     
 }
