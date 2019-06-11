@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 28-05-2019, 11:02:06
-    Author     : sistemas
+    Author     : sebastian
 --%>
 
 <%@page import="cl.model.Categoria"%>
