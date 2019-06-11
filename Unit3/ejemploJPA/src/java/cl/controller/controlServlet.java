@@ -65,7 +65,7 @@ public class controlServlet extends HttpServlet {
                 break;
         }
         
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("productos.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

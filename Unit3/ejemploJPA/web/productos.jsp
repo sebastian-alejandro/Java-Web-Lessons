@@ -30,18 +30,13 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>Productos</title>
-            <!-- Font Awesome -->
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-            <!-- Bootstrap core CSS -->
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-            <!-- Material Design Bootstrap -->
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+            <c:import url="librerias.jsp"/>
         </head>
         <body>
         <c:import url="menu.jsp"/>
         <div class="row justify-content-around">
-            <div class="col-4">
-                <!-- Default form login -->
+            <div class="col-6 col-lg-6 col-xl-4 py-5">
+                <!-- Form login -->
                 <form class="text-center border border-light p-5" action="control.do">
 
                     <p class="h4 mb-4">Agregar Producto</p>
@@ -59,29 +54,35 @@
                     <button class="btn btn-info btn-block my-4" name="btn" type="submit" value="agregarProducto">Agregar</button>
                 </form>
             </div>
-            <div class="col-4">
-                <table>
-                    <c:forEach  items="${producto.findAll()}" var="p">
+            <div class="col-6">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>${p.idproducto}</td>
-                            <td>${p.nomproducto}</td>
-                            <td>${p.stock}</td>
-                            <td>${p.precio}</td>
-                            <td>${p.idcategoria.nomcategoria}</td>
-                            <td><a href="editarproducto.jsp?id=${p.idproducto}&nombre=${p.nomproducto}&stock=${p.stock}&precio=${p.precio}&idCat=${p.idcategoria.idcategoria}">Editar</a></td>
+                            <th scope="col">id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Acción</th>
                         </tr>
-
-                    </c:forEach>
+                    </thead>
+                    <tbody>
+                        <c:forEach  items="${producto.findAll()}" var="p">
+                            <tr>
+                                <td>${p.idproducto}</td>
+                                <td>${p.nomproducto}</td>
+                                <td>${p.stock}</td>
+                                <td>${p.precio}</td>
+                                <td>${p.idcategoria.nomcategoria}</td>
+                                <td>
+                                    <button class="btn btn-default btn-sm" onclick="location.href='editarproducto.jsp?id=${p.idproducto}&nombre=${p.nomproducto}&stock=${p.stock}&precio=${p.precio}&idCat=${p.idcategoria.idcategoria}'"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger btn-sm" onclick="location.href='#'"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </c:forEach> 
+                    </tbody>
                 </table>
             </div>
         </div>
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
     </body>
 </html>
