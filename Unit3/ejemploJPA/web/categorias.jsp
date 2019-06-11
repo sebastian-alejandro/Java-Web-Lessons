@@ -33,9 +33,9 @@
 
                     <p class="h4 mb-4">Agregar Categoría</p>
 
-                    <input type="text" id="id" class="form-control mb-4" placeholder="Id" name="txtidproducto" value="" >
-                    <input type="text" id="nombre" class="form-control mb-4" placeholder="Nombre" name="txtnomproducto" value="">
-                    <input type="text" id="descripcion" class="form-control mb-4" placeholder="Descripción" name="txtstock" value="">
+                    <input type="text" id="id" class="form-control mb-4" placeholder="Id" name="txtidcategoria" value="" >
+                    <input type="text" id="nombre" class="form-control mb-4" placeholder="Nombre" name="txtnomcategoria" value="">
+                    <input type="text" id="descripcion" class="form-control mb-4" placeholder="Descripción" name="txtdescripcion" value="">
                     <!-- Sign in button -->
                     <button class="btn btn-info btn-block my-4" name="btn" type="submit" value="agregarCategoria">Agregar</button>
                 </form>

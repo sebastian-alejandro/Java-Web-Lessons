@@ -32,7 +32,7 @@
         <c:import url="menu.jsp"/>
         <div class="row justify-content-around">
             <div class="col-6 col-lg-6 col-xl-4 py-5">
-                <!-- Form login -->
+                <!-- Form -->
                 <form class="text-center border border-light p-5" action="control.do">
 
                     <p class="h4 mb-4">Editar ${param.nombre}</p>
