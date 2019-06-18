@@ -13,7 +13,11 @@
         </ul>
         <span class="navbar-text white-text">
             <c:if test="${not empty admin}">
-                <c:out value="${admin.nombre} ${admin.apellido}" />
+                
+                <form class="form-inline" action="login.do">
+                    <c:out value="${admin.nombre} ${admin.apellido}" />
+                    <button class="btn btn-outline-white btn-sm my-0 z-depth-0" name="btn" type="submit" value="logout">Cerrar Sesión</button>
+                </form>
             </c:if>
         </span>
     </div>

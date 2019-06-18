@@ -1,24 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cl.controller;
 
 import cl.ejb.UsuarioFacadeLocal;
 import cl.model.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sistemas
+ * @author sebastian
  */
 @WebServlet(name = "loginServlet", urlPatterns = {"/login.do"})
 public class loginServlet extends HttpServlet {
@@ -42,6 +38,8 @@ public class loginServlet extends HttpServlet {
         switch (btn) {
             case "login":
                 iniciarSesion(request, response);
+            case "logout":
+                cerrarSesion(request, response);
         }
     }
     
@@ -65,6 +63,18 @@ public class loginServlet extends HttpServlet {
             request.setAttribute("mensaje", "Usuario Incorrecto");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+        
+    }
+    
+    protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+            HttpSession session = request.getSession(false);
+            if(session!=null) session.invalidate();
+            
+            request.setAttribute("mensaje", "Ha cerrado sesión");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+       
         
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
