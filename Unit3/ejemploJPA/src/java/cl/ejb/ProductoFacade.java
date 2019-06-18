@@ -6,6 +6,7 @@
 package cl.ejb;
 
 import cl.model.Producto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +29,9 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
     public ProductoFacade() {
         super(Producto.class);
     }
-    
+
+    @Override
+    public List<Producto> getProductos() {
+        return em.createQuery("SELECT p FROM Producto p").getResultList();
+    }
 }

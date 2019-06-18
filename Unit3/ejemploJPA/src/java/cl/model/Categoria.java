@@ -39,12 +39,12 @@ public class Categoria implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idcategoria")
+    @Column(name = "codigocategoria")
     private Integer idcategoria;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "nomcategoria")
+    @Column(name = "nombre")
     private String nomcategoria;
     @Basic(optional = false)
     @NotNull

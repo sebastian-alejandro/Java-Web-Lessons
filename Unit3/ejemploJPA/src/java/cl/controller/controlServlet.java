@@ -63,6 +63,10 @@ public class controlServlet extends HttpServlet {
             case "editarProducto":
                 producto.edit(p);
                 break;
+            case "agregarCarro":
+                request.setAttribute("mensaje", p.getNomproducto());
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
         }
         
         response.sendRedirect("productos.jsp");

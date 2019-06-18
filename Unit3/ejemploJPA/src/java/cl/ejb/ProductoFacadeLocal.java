@@ -29,5 +29,7 @@ public interface ProductoFacadeLocal {
     List<Producto> findRange(int[] range);
 
     int count();
+
+    java.util.List<Producto> getProductos();
     
 }

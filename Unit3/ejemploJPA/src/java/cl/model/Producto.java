@@ -38,12 +38,12 @@ public class Producto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idproducto")
+    @Column(name = "codigoproducto")
     private Integer idproducto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
-    @Column(name = "nomproducto")
+    @Column(name = "nombre")
     private String nomproducto;
     @Basic(optional = false)
     @NotNull
@@ -53,7 +53,7 @@ public class Producto implements Serializable {
     @NotNull
     @Column(name = "precio")
     private int precio;
-    @JoinColumn(name = "idcategoria", referencedColumnName = "idcategoria")
+    @JoinColumn(name = "codigocategoria", referencedColumnName = "codigocategoria")
     @ManyToOne(optional = false)
     private Categoria idcategoria;
 

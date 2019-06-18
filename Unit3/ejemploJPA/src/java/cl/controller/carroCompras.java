@@ -1,28 +1,34 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cl.controller;
 
-import cl.ejb.UsuarioFacadeLocal;
-import cl.model.Usuario;
+import cl.ejb.ProductoFacadeLocal;
+import cl.model.Producto;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sebastian
+ * @author sistemas
  */
-@WebServlet(name = "loginServlet", urlPatterns = {"/login.do"})
-public class loginServlet extends HttpServlet {
+@WebServlet(name = "carroCompras", urlPatterns = {"/carroCompras"})
+public class carroCompras extends HttpServlet {
 
     @EJB
-    private UsuarioFacadeLocal usuarioFacade;
+    private ProductoFacadeLocal productoFacade;
     
     
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,50 +40,15 @@ public class loginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String btn = request.getParameter("btn");
-        switch (btn) {
-            case "login":
-                iniciarSesion(request, response);
+        
+        switch (btn){
+            case "agregarCarro":
+                agregarCarro(request,response);
         }
     }
-    
-    protected void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String rut = request.getParameter("txtrut");
-        String clave = request.getParameter("txtclave");
-        
-        Usuario user = usuarioFacade.iniciarSesion(rut, clave);
-        if (user != null) {
-            if (user.getTipo().equals("admin")) {
-                request.getSession().setAttribute("admin", user);
-                response.sendRedirect("admin.jsp");
-            } else if (user.getTipo().equals("cliente")) {
-                request.getSession().setAttribute("cliente", user);
-                response.sendRedirect("cliente.jsp");
-            } else if (user.getTipo().equals("vendedor")) {
-                request.getSession().setAttribute("vendedor", user);
-                response.sendRedirect("vendedor.jsp");
-            }
-            
-        } else {
-            request.setAttribute("mensaje", "Usuario Incorrecto");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-        
-    }
-    
-    protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
-            HttpSession session = request.getSession(false);
-            if(session!=null) session.invalidate();
-            
-            request.setAttribute("mensaje", "Ha cerrado sesión");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-       
-        
-    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -116,5 +87,24 @@ public class loginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void agregarCarro(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+        
+        String codigo = request.getParameter("codigo");
+        Producto p = productoFacade.find(Integer.parseInt(codigo));
+        
+        ArrayList<Producto> carrolist = (ArrayList) request.getSession().getAttribute("carro");
+        if (carrolist==null) {
+            carrolist = new ArrayList();
+        }
+        
+        if (!carrolist.contains(p)){
+            carrolist.add(p);
+            request.getSession().setAttribute("carro", carrolist);
+        }
+        
+        response.sendRedirect("misventas.jsp");
+    }
 
 }
